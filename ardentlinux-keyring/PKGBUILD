@@ -1,0 +1,15 @@
+pkgname=ardentlinux-keyring
+pkgver=20220927
+pkgrel=2
+pkgdesc='ArdentLinux PGP keyring'
+arch=('any')
+license=('GPL')
+install="${pkgname}.install"
+makedepends=("git")
+source=("git+https://github.com/ardentteams/ardentlinux-keyring.git")
+validpgpkeys=("3DB0B04F67B35F427DCD1BBFCCA719880701ABDE")
+sha256sums=('SKIP')
+package() {
+    cd "${srcdir}/${pkgname}"
+    make PREFIX=/usr DESTDIR="${pkgdir}" install
+}
