@@ -5,6 +5,8 @@ if [ -d "/github" ];then
 fi
 sudo pacman -Sy 
 
+ls -lsa
+
 repo-add -k ardent-repo.db.tar.xz *.pkg.tar.zst
 
 echo "================"
