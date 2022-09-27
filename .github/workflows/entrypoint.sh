@@ -13,7 +13,7 @@ sudo pacman -Sy
 export MAKEFLAGS=-j$(nproc)
 ls -1 ${WORK_DIR} | while read line;
 do
-    cd $(WORK_DIR)/${line}
+    cd ${WORK_DIR}/${line}
     namcap PKGBUILD
     makepkg -fC --syncdeps --noconfirm
     mv *.pkg.tar.zst ../
