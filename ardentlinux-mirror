@@ -1,0 +1,6 @@
+#
+# ArdentLinux Mirror list
+#
+
+# Github Custom Domain
+Server = https://repo.atolycs.net/stable/$arch/
