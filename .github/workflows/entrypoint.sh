@@ -5,6 +5,9 @@ if [ -d "/github" ];then
 fi
 WORK_DIR="$(pwd)"
 
+echo "${WORK_DIR}"
+ls -lsa
+
 sudo pacman -Sy
 
 export MAKEFLAGS=-j$(nproc)
