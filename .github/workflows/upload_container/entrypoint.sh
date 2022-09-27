@@ -7,7 +7,7 @@ sudo pacman -Sy
 
 ls -lsa
 
-repo-add -k ardent-repo.db.tar.xz ./ardent-repos/*.pkg.tar.zst
+repo-add -k ardent-repo.db.tar.xz *.pkg.tar.zst
 
 echo "================"
 echo "Package created:"
