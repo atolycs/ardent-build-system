@@ -15,11 +15,25 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v3
         - name: Build All Package
-          uses: ./.github/workflows/
+          uses: ./.github/workflows/build_container/
           id: arch-build
         - name: Upload Artifacts
           uses: actions/upload-artifact@v3
           with:
            name: artifact_package
            path: "*.pkg.tar.zst"
-
+    update_repo:
+          runs-on: ubuntu-22.04
+          needs: build_packs
+          name: Update Repos
+          steps:
+            - name: checkout
+              uses: actions/checkout@v3
+              with:
+                repository: atolycs/ardent-repo
+            - name: Download Artifact
+              uses: actions/download-artifact@v3
+              with:
+                name: artifact_package
+            - name: Update Repo Data
+              uses: ./.github/workflows/upload_container/
