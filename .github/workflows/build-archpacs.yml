@@ -38,7 +38,7 @@ jobs:
               uses: ./.github/workflows/upload_container/
               id: arch-upload
               env:
-               - GPGKEY: ${{ secrets.GPGKEY_SEC }}
+               GPGKEY: ${{ secrets.GPGKEY_SEC }}
             - name: Upload Artifacts
               uses: actions/upload-artifact@v3
               with:
