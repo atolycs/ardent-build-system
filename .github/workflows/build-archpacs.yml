@@ -22,24 +22,26 @@ jobs:
           with:
            name: artifact_package
            path: "*.pkg.tar.zst"
+
     update_repo:
           runs-on: ubuntu-22.04
           needs: build_packs
           name: Update Repos
           steps:
-            - name: Checkout
-              uses: actions/checkout@v3
-              with:
-                repository: atolycs/ardent-repo
-                path: ./ardent-repos
-
             - name: Download Artifact
               uses: actions/download-artifact@v3
               with:
                 name: artifact_package
                 path: ./ardent-repos
-
             - name: Update Repo Data
               uses: ./.github/workflows/upload_container/
                 id: arch-upload
+            - name: Upload Artifacts
+              uses: actions/upload-artifact@v3
+              with:
+                name: artifact_db
+                path: |
+                    - "*.pkg.tar.zst"
+                    - "*.pkg.tar.zst.sig"
+                    - "*ardent-repo.*"
 
