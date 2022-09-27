@@ -43,7 +43,7 @@ jobs:
               with:
                 name: artifact_db
                 path: |
-                    - "*.pkg.tar.zst"
-                    - "*.pkg.tar.zst.sig"
-                    - "*ardent-repo.*"
+                     "*.pkg.tar.zst"
+                     "*.pkg.tar.zst.sig"
+                     "*ardent-repo.*"
 
