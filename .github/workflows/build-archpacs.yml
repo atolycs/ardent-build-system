@@ -14,7 +14,7 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v3
         - name: Build All Package
-          uses: ./
+          uses: ./.github/workflows/
           id: arch-build
         - name: Upload Artifacts
           uses: actions/upload-artifact@v3
