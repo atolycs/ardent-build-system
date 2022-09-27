@@ -27,14 +27,19 @@ jobs:
           needs: build_packs
           name: Update Repos
           steps:
-            - name: checkout
+            - name: Checkout
               uses: actions/checkout@v3
               with:
                 repository: atolycs/ardent-repo
+                path: ./ardent-repos
+
             - name: Download Artifact
               uses: actions/download-artifact@v3
               with:
                 name: artifact_package
+                path: ./ardent-repos
+
             - name: Update Repo Data
               uses: ./.github/workflows/upload_container/
                 id: arch-upload
+
