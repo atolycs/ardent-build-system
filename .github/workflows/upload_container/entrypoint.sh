@@ -5,7 +5,7 @@ if [ -d "/github" ];then
 fi
 sudo pacman -Sy 
 
-gpg --import < $(cat ${GPG_SEC})
+gpg --import ${GPG_SEC}
 
 ls -lsa
 repo-add -n --sign  ardent-repo.db.tar.xz *.pkg.tar.zst

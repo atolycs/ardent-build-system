@@ -37,7 +37,7 @@ jobs:
             - name: Update Repo Data
               uses: ./.github/workflows/upload_container/
               id: arch-upload
-              env:
+              env: | 
                GPGKEY: ${{ secrets.GPGKEY_SEC }}
                GPG_SEC: ${{ secrets.GPG_PRV }}
             - name: Upload Artifacts
