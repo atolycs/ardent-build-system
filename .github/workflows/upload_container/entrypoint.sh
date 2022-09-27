@@ -11,5 +11,6 @@ repo-add ardent-repo.db.tar.xz *.pkg.tar.zst
 
 echo "================"
 echo "Package created:"
-echo `ls -lsa`
+#echo `ls -lsa`
+ls -lsa
 echo "================"
