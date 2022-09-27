@@ -35,7 +35,7 @@ jobs:
                 path: ./ardent-repos
             - name: Update Repo Data
               uses: ./.github/workflows/upload_container/
-                id: arch-upload
+              id: arch-upload
             - name: Upload Artifacts
               uses: actions/upload-artifact@v3
               with:
