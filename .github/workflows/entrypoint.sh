@@ -6,6 +6,7 @@ fi
 WORK_DIR="$(pwd)"
 
 echo "${WORK_DIR}"
+ls -lsa
 
 sudo pacman -Sy
 
