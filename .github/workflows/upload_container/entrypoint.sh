@@ -5,7 +5,9 @@ if [ -d "/github" ];then
 fi
 sudo pacman -Sy 
 
-gpg --fetch-keys https://raw.githubusercontent.com/atolycs/ardentlinux-keyring/master/ardentlinux.gpg
+pacman-key --init
+wget https://raw.githubusercontent.com/atolycs/ardentlinux-keyring/master/ardentlinux.gpg
+pacman-key --add ./ardentlinux.gpg
 
 ls -lsa
 repo-add -n --sign  ardent-repo.db.tar.xz *.pkg.tar.zst
