@@ -75,10 +75,10 @@ jobs:
                 path: ./x86_64
             - name: Create Links
               run: |
-                ln -s ./ardent-staging.db.tar.xz ./ardent-staging.db
-                ln -s ./ardent-staging.files.tar.xz ./ardent-staging.files
-                ln -s ./ardent-stable.db.tar.xz ./ardent-stable.db
-                ln -s ./ardent-stable.files.tar.xz ./ardent-stable.files
+                ln -s ./ardent-staging.db.tar.xz ./x86_64/ardent-staging.db
+                ln -s ./ardent-staging.files.tar.xz ./x86_64/ardent-staging.files
+                ln -s ./ardent-stable.db.tar.xz ./x86_64/ardent-stable.db
+                ln -s ./ardent-stable.files.tar.xz ./x86_64/ardent-stable.files
             - name: Git config
               env:
                 GIT_ACTION_MAIL: ${{ secrets.GIT_ACTION_EMAIL }}
