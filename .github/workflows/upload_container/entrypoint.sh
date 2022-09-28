@@ -12,8 +12,9 @@ sudo pacman-key --add ./ardentlinux.gpg
 
 
 ls -lsa
-repo-add -n --sign  ardent-repo.db.tar.xz *.pkg.tar.zst
-    
+repo-add -n --sign ardent-staging.db.tar.xz *.pkg.tar.zst
+repo-add -n --sign ardent-stable.db.tar.xz *.pkg.tar.zst
+
 
 echo "================"
 echo "Package created:"
