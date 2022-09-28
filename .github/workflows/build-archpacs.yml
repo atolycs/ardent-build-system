@@ -56,5 +56,27 @@ jobs:
               with:
                 name: artifact_db
                 path: "ardent-stable.*.tar.xz"
-
-
+    upload_stgrepo:
+        runs-on: ubuntu-22.04
+        needs: update_repo
+        steps:
+            - name: Checkout Staging Repo
+              uses: actions/checkout@v3
+              with:
+                repository: atolycs/ardent-repo
+            - name: Download Artifacts
+              with:
+                name: artifact_db
+                path: ./x86_64
+            - name: Git config
+              env:
+                GIT_ACTION_MAIL: ${{ secrets.GIT_ACTION_EMAIL }}
+              run: |
+                git config --local user.name "Atolycs by Github Actions"
+                git config --local user.email ${GIT_ACTION_MAIL}
+            - name: Push
+              run: |
+                git add -A
+                git commit -m "[Action] Update Repository"
+                git pull
+                git push 
