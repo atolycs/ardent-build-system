@@ -41,8 +41,16 @@ jobs:
               uses: actions/upload-artifact@v3
               with:
                 name: artifact_db
-                path: |
-                     "./*.pkg.tar.zst"
-                     "./*.pkg.tar.zst.sig"
-                     "./ardent-repo.*"
+                path: "*.pkg.tar.zst"
+            - name: Upload Artifacts
+              uses: actions/upload-artifact@v3
+              with:
+                name: artifact_db
+                path: "*.pkg.tar.zst.sig"
+            - name: Upload Artifacts
+              uses: actions/upload-artifact@v3
+              with:
+                name: artifact_db
+                path: "ardent-repo.*"
+
 
