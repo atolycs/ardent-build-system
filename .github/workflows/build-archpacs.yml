@@ -51,11 +51,11 @@ jobs:
               uses: actions/upload-artifact@v3
               with:
                 name: artifact_db
-                path: "ardent-staging.*"
+                path: "ardent-staging.*.tar.xz"
             - name: Upload Artifacts
               uses: actions/upload-artifact@v3
               with:
                 name: artifact_db
-                path: "ardent-stable.*"
+                path: "ardent-stable.*.tar.xz"
 
 
