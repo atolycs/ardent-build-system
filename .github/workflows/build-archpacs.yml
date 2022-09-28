@@ -59,6 +59,10 @@ jobs:
     upload_stgrepo:
         runs-on: ubuntu-22.04
         needs: update_repo
+        permissions:
+            pull-requests: write
+            contents: write
+            repository-projects: write
         steps:
             - name: Checkout Staging Repo
               uses: actions/checkout@v3
