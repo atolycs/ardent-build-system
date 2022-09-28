@@ -7,7 +7,8 @@ RUN pacman -Syu --needed --noconfirm \
     pacman-contrib \
     sudo \
     git \
-    make 
+    make \
+    wget 
 
 RUN useradd -d /build -m build
 RUN echo "build ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
