@@ -65,6 +65,7 @@ jobs:
               with:
                 repository: atolycs/ardent-repo
             - name: Download Artifacts
+              uses: actions/download-artifact@v3
               with:
                 name: artifact_db
                 path: ./x86_64
