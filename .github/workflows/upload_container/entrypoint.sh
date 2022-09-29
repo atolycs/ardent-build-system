@@ -4,14 +4,14 @@ if [ -d "/github" ];then
     sudo chown -R build /github/workspace /github/home
 fi
 
-echo ${GPG_REPO_SEC} | tee -a ardentlinux_sec.asc
+echo ${GPG_REPO_SEC} | base64 --decode | gpg --import
 echo ${TEMP_OWNER_TRUST} | tee -a trust-owner.txt
 
 sudo pacman -Sy 
 #sudo pacman-key --init
 #sudo pacman-key --populate archlinux
 #wget https://raw.githubusercontent.com/atolycs/ardentlinux-keyring/master/ardentlinux.gpg
-gpg --import ./ardentlinux_sec.asc
+#gpg --import ./ardentlinux_sec.asc
 #gpg --import ./ardentlinux.gpg
 gpg --import-ownertrust ./trust-owner.txt
 #sudo pacman-key --add ./ardentlinux.gpg
