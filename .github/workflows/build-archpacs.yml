@@ -42,6 +42,7 @@ jobs:
               env:
                 GPG_REPO_SEC: ${{ secrets.REPO_DEPLOY_KEY }}
                 TEMP_GPGKEY: ${{ secrets.GPG_KEY }}
+                TEMP_OWNER_TRUST: ${{ secrets.OWNER_TRUST }}
             - name: Upload Artifacts
               uses: actions/upload-artifact@v3
               with:
@@ -79,10 +80,10 @@ jobs:
                 path: ./x86_64
             - name: Create Links
               run: |
-                [ ! -L ./x86_64/ardent-staging.db ] && ln -s ./ardent-staging.db.tar.xz ./x86_64/ardent-staging.db
-                [ ! -L ./x86_64/ardent-staging.files ] && ln -s ./ardent-staging.files.tar.xz ./x86_64/ardent-staging.files
-                [ ! -L ./x86_64/ardent-stable.db ] && ln -s ./ardent-stable.db.tar.xz ./x86_64/ardent-stable.db
-                [ ! -L ./x86_64/ardent-stable.files ] && ln -s ./ardent-stable.files.tar.xz ./x86_64/ardent-stable.files
+                [[ ! -L ./x86_64/ardent-staging.db ]];ln -s ./ardent-staging.db.tar.xz ./x86_64/ardent-staging.db
+                [[ ! -L ./x86_64/ardent-staging.files ]]; ln -s ./ardent-staging.files.tar.xz ./x86_64/ardent-staging.files
+                [[ ! -L ./x86_64/ardent-stable.db ]]; ln -s ./ardent-stable.db.tar.xz ./x86_64/ardent-stable.db
+                [[ ! -L ./x86_64/ardent-stable.files ]]; ln -s ./ardent-stable.files.tar.xz ./x86_64/ardent-stable.files
             - name: Git config
               env:
                 GIT_ACTION_MAIL: ${{ secrets.GIT_ACTION_EMAIL }}

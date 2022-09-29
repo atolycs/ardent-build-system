@@ -6,6 +6,7 @@ fi
 
 echo ${GPG_REPO_SEC} | tee -a ardentlinux_sec.gpg
 export GPGKEY=${TEMP_GPG_KEY}
+echo ${TEMP_OWNER_TRUST} | tee -a trust-owner.txt
 
 sudo pacman -Sy 
 sudo pacman-key --init
@@ -14,7 +15,7 @@ wget https://raw.githubusercontent.com/atolycs/ardentlinux-keyring/master/ardent
 sudo pacman-key --add ./ardentlinux.gpg
 gpg --import ./ardentlinux_sec.gpg
 gpg --import ./ardentlinux.gpg
-
+gpg --import-oownertrust ./trust-owner.txt
 ls -lsa
 
 ls -1 *.pkg.tar.zst | while read line; do
