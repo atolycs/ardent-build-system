@@ -78,13 +78,17 @@ jobs:
               uses: actions/download-artifact@v3
               with:
                 name: artifact_db
-                path: ./x86_64
-            - name: Create Links
+                path: ./artifacts_db
+            - name: Rsync Repo Data
               run: |
-                [[ ! -L ./x86_64/ardent-staging.db ]];ln -s ./ardent-staging.db.tar.xz ./x86_64/ardent-staging.db
-                [[ ! -L ./x86_64/ardent-staging.files ]]; ln -s ./ardent-staging.files.tar.xz ./x86_64/ardent-staging.files
-                [[ ! -L ./x86_64/ardent-stable.db ]]; ln -s ./ardent-stable.db.tar.xz ./x86_64/ardent-stable.db
-                [[ ! -L ./x86_64/ardent-stable.files ]]; ln -s ./ardent-stable.files.tar.xz ./x86_64/ardent-stable.files
+                rsync -auvz ./artifacts_db ./x86_64
+                rm -rf ./artifacts_db
+#            - name: Create Links
+#              run: |
+#                [[ ! -L ./x86_64/ardent-staging.db ]];ln -s ./ardent-staging.db.tar.xz ./x86_64/ardent-staging.db
+#                [[ ! -L ./x86_64/ardent-staging.files ]]; ln -s ./ardent-staging.files.tar.xz ./x86_64/ardent-staging.files
+#                [[ ! -L ./x86_64/ardent-stable.db ]]; ln -s ./ardent-stable.db.tar.xz ./x86_64/ardent-stable.db
+#                [[ ! -L ./x86_64/ardent-stable.files ]]; ln -s ./ardent-stable.files.tar.xz ./x86_64/ardent-stable.files
             - name: Git config
               env:
                 GIT_ACTION_MAIL: ${{ secrets.GIT_ACTION_EMAIL }}
