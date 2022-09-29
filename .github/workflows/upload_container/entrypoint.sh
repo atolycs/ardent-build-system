@@ -15,7 +15,7 @@ wget https://raw.githubusercontent.com/atolycs/ardentlinux-keyring/master/ardent
 sudo pacman-key --add ./ardentlinux.gpg
 gpg --import ./ardentlinux_sec.gpg
 gpg --import ./ardentlinux.gpg
-gpg --import-oownertrust ./trust-owner.txt
+gpg --import-ownertrust ./trust-owner.txt
 ls -lsa
 
 ls -1 *.pkg.tar.zst | while read line; do
