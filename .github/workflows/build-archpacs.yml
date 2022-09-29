@@ -86,10 +86,10 @@ jobs:
                 rm -rf ./artifacts_db
             - name: Create Links
               run: |
-                ln -sF ./ardent-staging.db.tar.xz ./x86_64/ardent-staging.db
-                ln -sF ./ardent-staging.files.tar.xz ./x86_64/ardent-staging.files
-                ln -sF ./ardent-stable.db.tar.xz ./x86_64/ardent-stable.db
-                ln -sF ./ardent-stable.files.tar.xz ./x86_64/ardent-stable.files
+                ln -sf ./ardent-staging.db.tar.xz ./x86_64/ardent-staging.db
+                ln -sf ./ardent-staging.files.tar.xz ./x86_64/ardent-staging.files
+                ln -sf ./ardent-stable.db.tar.xz ./x86_64/ardent-stable.db
+                ln -sf ./ardent-stable.files.tar.xz ./x86_64/ardent-stable.files
             - name: Git config
               env:
                 GIT_ACTION_MAIL: ${{ secrets.GIT_ACTION_EMAIL }}
