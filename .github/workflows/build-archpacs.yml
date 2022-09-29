@@ -41,7 +41,7 @@ jobs:
               id: arch-upload
               env:
                 GPG_REPO_SEC: ${{ secrets.REPO_DEPLOY_KEY }}
-                GPGKEY: ${{ secrets.GPG_KEY }}
+                TEMP_GPGKEY: ${{ secrets.GPG_KEY }}
             - name: Upload Artifacts
               uses: actions/upload-artifact@v3
               with:

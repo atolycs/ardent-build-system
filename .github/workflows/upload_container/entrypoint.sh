@@ -5,6 +5,7 @@ if [ -d "/github" ];then
 fi
 
 echo ${GPG_REPO_SEC} | tee -a ardentlinux_sec.gpg
+export GPGKEY=${TEMP_GPG_KEY}
 
 sudo pacman -Sy 
 sudo pacman-key --init
