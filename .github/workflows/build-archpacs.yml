@@ -43,6 +43,7 @@ jobs:
                 GPG_REPO_SEC: ${{ secrets.REPO_DEPLOY_KEY }}
                 TEMP_GPGKEY: ${{ secrets.GPG_KEY }}
                 TEMP_OWNER_TRUST: ${{ secrets.OWNER_TRUST }}
+                TEMP_GPG_KEYFINGER_SEC: ${{ secrets.GPG_KEYFINGER_SEC }}
             - name: Upload Artifacts
               uses: actions/upload-artifact@v3
               with:
