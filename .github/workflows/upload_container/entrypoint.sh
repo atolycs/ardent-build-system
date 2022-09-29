@@ -15,6 +15,8 @@ sudo pacman-key --add ./ardentlinux.gpg
 gpg --import ./ardentlinux_sec.gpg
 gpg --import ./ardentlinux.gpg
 gpg --import-ownertrust ./trust-owner.txt
+gpg --list-keys
+
 export GPGKEY=${TEMP_GPG_KEY}
 ls -lsa
 
