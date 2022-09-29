@@ -15,6 +15,7 @@ ls -1 ${WORK_DIR} | while read line;
 do
     cd ${WORK_DIR}/${line}
     namcap PKGBUILD
+    updpkgsums
     makepkg -fC --syncdeps --noconfirm
     mv *.pkg.tar.zst ../
 done
