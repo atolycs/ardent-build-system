@@ -65,6 +65,8 @@ jobs:
                   publish_branch: main
                   cname: ${{ secrets.ACTIONS_CNAME }}
                   exclude_assets: 'CNAME'
+                  user_email: ${{ secrets.APPS_EMAIL }}
+                  user_name: ${{ secrets.APPS_NAME }}
 
     trigger_issue:
            runs-on: ubuntu-22.04
