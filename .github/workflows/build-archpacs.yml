@@ -82,6 +82,8 @@ jobs:
                 path: ./artifacts_db
             - name: Rsync Repo Data
               run: |
+                ls -lsa
+                ls -lsa ./artifacts_db 
                 rsync -auvz ./artifacts_db/* ./x86_64
                 rm -rf ./artifacts_db
             - name: Create Links
