@@ -85,7 +85,7 @@ jobs:
                 fetch-depth: 0
             - name: Trigger Issue Create
               env:
-                GH_TOKEN: ${{ steps.generate_token_outputs.token }}
+                GH_TOKEN: ${{ steps.generate_token.outputs.token }}
                 TEMPLATE_MSG: "Check to [here](https://github.com/atolycs/ardent-repo.git) and Run`sudo pacman -Sy`<br>If No problem then add Label `lgtm`"
               run: |
                 echo "${TEMPLATE_MSG}" | gh issue create \
