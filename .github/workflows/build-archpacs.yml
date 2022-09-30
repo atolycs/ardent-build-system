@@ -27,11 +27,19 @@ jobs:
           needs: build_packs
           name: Update Repos
           steps:
-            - name: checkout
+           - name: Generate One Time Token
+              id: generate_token
+              uses: tibdex/github-app-token@v1
+              with:
+                app_id: ${{ secrets.APP_ID }}
+                private_key: ${{ secrets.PRIVATE_KEY }}
+
+           - name: checkout
               uses: actions/checkout@v3
               with:
                 token: ${{ secrets.GITHUB_TOKEN }}
-            - name: Download Artifact
+ 
+           - name: Download Artifact
               uses: actions/download-artifact@v3
               with:
                 name: artifact_package
@@ -47,17 +55,17 @@ jobs:
                 TEMP_GPG_KEYFINGER_SEC: ${{ secrets.GPG_KEYFINGER_SEC }}
                 build_arch: "x86_64"
                 _repos: "staging"
+
             - name: Deploy Staging Pages
               uses: peaceiris/actions-gh-pages@v3
               with:
-                  personal_token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+                  personal_token: ${{ steps.generate_token.outputs.token }}
                   publish_dir: ./x86_64
                   destination_dir: ./x86_64
                   external_repository: atolycs/ardent-repo
                   publish_branch: main
                   cname: ${{ secrets.ACTIONS_CNAME }}
-                  user_name: "Atolycs for Actions"
-                  user_email: "111569596+github-actions[bot]@users.noreply.github.com"
+                  user_name: "ArdentLinux Cats"
                   exclude_assets: 'CNAME'
 
     trigger_issue:
@@ -65,18 +73,25 @@ jobs:
            needs: update_repo
            name: Trigger Issue Create
            steps:
+            - name: Generate One Time Token
+              id: generate_token
+              uses: tibdex/github-app-token@v1
+              with:
+                app_id: ${{ secrets.APP_ID }}
+                private_key: ${{ secrets.PRIVATE_KEY }}
+
             - name: Checkout
               uses: actions/checkout@v3
               with:
                 fetch-depth: 0
             - name: Trigger Issue Create
               env:
-                GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                GH_TOKEN: ${{ steps.generate_token_outputs.token }}
+                TEMPLATE_MSG: "Check to [here](https\://github.com/atolycs/ardent-repo.git) and Run\`sudo pacman -Sy\`<br>If No problem then add Label\`lgtm\`"
               run: |
-                gh issue create \
+                echo ${TEMPLATE_MSG} | gh issue create \
                    --title "[$(date +%Y%m%d-%H%m%S)] ArdentLinux Builded." \
-                   --body "Check to [here](https://github.com/atolycs/ardent-repo.git)\n and Run\`sudo pacman -Sy\`\n If No problem then add Label\`lgtm\`"
-
+                   --body-file -
 
 #            - name: Upload Artifacts
 #              uses: actions/upload-artifact@v3
