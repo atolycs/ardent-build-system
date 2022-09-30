@@ -29,7 +29,14 @@ ls -1 *.pkg.tar.zst | while read line; do
     gpg --output "${line}.sig" --detach-sig "${line}"
 done
 
-repo-add -n --sign ardent-staging.db.tar.xz *.pkg.tar.zst
+if [[ ! -z "${_repos}" ]];then
+    case "${_repos}" in
+        "staging") repo-add -n --sign ardent-staging.db.tar.xz *.pkg.tar.zst;;
+        "stable") repo-add -n --sign ardent-stable.db.tar.xz *.pkg.tar.zst;;
+    esac
+fi
+
+#repo-add -n --sign ardent-staging.db.tar.xz *.pkg.tar.zst
 #repo-add -n --sign ardent-stable.db.tar.xz *.pkg.tar.zst
 
 

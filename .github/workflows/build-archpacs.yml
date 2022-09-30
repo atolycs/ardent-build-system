@@ -66,7 +66,7 @@ jobs:
               run: |
                 gh issue create \
                    --title "[$(date +%Y%m%d-%H%m%S)] ArdentLinux Builded." \
-                   --body "Check to [here](https://github.com/atolycs/ardent-repo.git)\n and Run`sudo pacman -Sy`\n If No problem then add Label`continue`"
+                   --body "Check to [here](https://github.com/atolycs/ardent-repo.git)\n and Run\`sudo pacman -Sy\`\n If No problem then add Label\`lgtm\`"
 
 
 #            - name: Upload Artifacts
