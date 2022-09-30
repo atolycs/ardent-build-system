@@ -58,7 +58,8 @@ jobs:
             - name: Deploy Staging Pages
               uses: peaceiris/actions-gh-pages@v3
               with:
-                  personal_token: ${{ steps.generate_token.outputs.token }}
+#                  personal_token: ${{ steps.generate_token.outputs.token }}
+                  github_token: ${{ steps.generate_token.outputs.token }}
                   publish_dir: ./x86_64
                   destination_dir: ./x86_64
                   external_repository: atolycs/ardent-repo
