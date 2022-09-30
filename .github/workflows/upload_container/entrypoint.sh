@@ -21,6 +21,10 @@ gpg --list-keys
 export GPGKEY=${TEMP_GPG_KEY}
 ls -lsa
 
+if [ ! -z "${build_arch}" ];then
+    cd ${build_arch}
+fi
+
 ls -1 *.pkg.tar.zst | while read line; do
     gpg --output "${line}.sig" --detach-sig "${line}"
 done

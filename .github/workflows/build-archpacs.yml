@@ -37,11 +37,6 @@ jobs:
                 name: artifact_package
                 path: ./x86_64
 
-            - name: Move Directory
-              run: |
-                 ls -lsa
-                 cd ./x86_64
-
             - name: Update Repo Data
               uses: ./.github/workflows/upload_container/
               id: arch-upload
@@ -50,6 +45,7 @@ jobs:
                 TEMP_GPGKEY: ${{ secrets.GPG_KEY }}
                 TEMP_OWNER_TRUST: ${{ secrets.OWNER_TRUST }}
                 TEMP_GPG_KEYFINGER_SEC: ${{ secrets.GPG_KEYFINGER_SEC }}
+                build_arch: "x86_64"
             - name: Deploy Staging Pages
               uses: peaceiris/actions-gh-pages@v3
               with:
