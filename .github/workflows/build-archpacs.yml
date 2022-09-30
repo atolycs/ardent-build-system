@@ -56,6 +56,8 @@ jobs:
                   external_repository: atolycs/ardent-repo
                   publish_branch: main
                   cname: ${{ secrets.ACTIONS_CNAME }}
+                  user_name: "Atolycs for Actions"
+                  user_email: "111569596+github-actions[bot]@users.noreply.github.com"
                   exclude_assets: 'CNAME'
 
     trigger_issue:
