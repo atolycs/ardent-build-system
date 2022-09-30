@@ -46,6 +46,7 @@ jobs:
                 TEMP_OWNER_TRUST: ${{ secrets.OWNER_TRUST }}
                 TEMP_GPG_KEYFINGER_SEC: ${{ secrets.GPG_KEYFINGER_SEC }}
                 build_arch: "x86_64"
+                _repos: "staging"
             - name: Deploy Staging Pages
               uses: peaceiris/actions-gh-pages@v3
               with:
