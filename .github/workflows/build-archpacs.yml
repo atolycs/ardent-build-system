@@ -56,6 +56,12 @@ jobs:
                   publish_branch: main
                   cname: ${{ secrets.ACTIONS_CNAME }}
                   exclude_assets: 'CNAME'
+
+    trigger_issue:
+           runs-on: ubuntu-22.04
+           needs: update_repo
+           name: Trigger Issue Create
+           steps:
             - name: Trigger Issue Create
               run: |
                 gh issue create \
