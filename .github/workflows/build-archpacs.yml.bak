@@ -35,11 +35,7 @@ jobs:
               uses: actions/download-artifact@v3
               with:
                 name: artifact_package
-                path: ./x86_64
-            - name: Move Directory
-               run: |
-                    ls -lsa
-                    cd x86_64
+
             - name: Update Repo Data
               uses: ./.github/workflows/upload_container/
               id: arch-upload
