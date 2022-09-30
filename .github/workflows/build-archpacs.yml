@@ -26,6 +26,7 @@ jobs:
           runs-on: ubuntu-22.04
           needs: build_packs
           name: Update Repos
+          environment: APP_TOKEN
           steps:
             - name: Generate One Time Token
               id: generate_token
@@ -71,6 +72,7 @@ jobs:
     trigger_issue:
            runs-on: ubuntu-22.04
            needs: update_repo
+           environment: APP_TOKEN
            name: Trigger Issue Create
            steps:
             - name: Generate One Time Token
