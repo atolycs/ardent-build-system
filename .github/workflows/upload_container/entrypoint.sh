@@ -26,7 +26,7 @@ ls -1 *.pkg.tar.zst | while read line; do
 done
 
 repo-add -n --sign ardent-staging.db.tar.xz *.pkg.tar.zst
-repo-add -n --sign ardent-stable.db.tar.xz *.pkg.tar.zst
+#repo-add -n --sign ardent-stable.db.tar.xz *.pkg.tar.zst
 
 
 echo "================"
