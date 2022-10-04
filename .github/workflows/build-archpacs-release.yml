@@ -56,18 +56,18 @@ jobs:
                 _repos: "stable"
 
             - name: Deploy Staging Pages
-              uses: dmnemec/copy_file_to_another_repo_action@main
-#              uses: peaceiris/actions-gh-pages@v3
-              env:
-                API_TOKEN_GITHUB: ${{ steps.generate_token.outputs.token }}
+              uses: peaceiris/actions-gh-pages@v3
               with:
-#                  personal_token: ${{ steps.generate_token.outputs.token }}
+                  personal_token: ${{ steps.generate_token.outputs.token }}
 #                  github_token: ${{ steps.generate_token.outputs.token }}
-                  source_file: "./x86_64"
-                  destination_folder: "./x86_64"
-                  destination_repo: "ardentteams/ardent-repo"
+                  publish_dir: ./x86_64
+                  destination_dir: ./x86_64
+                  external_repository: atolycs/ardent-repo
+                  publish_branch: stable
+                  cname: ${{ secrets.ACTIONS_CNAME }}
+                  exclude_assets: 'CNAME'
                   user_email: "github-actions[bot]@users.noreply.github.com"
-                  user_name: "${{ secrets.APPS_NAME }}"
+                  user_name: ${{ secrets.APPS_NAME }}
 
     trigger_issue:
            runs-on: ubuntu-22.04
@@ -86,10 +86,21 @@ jobs:
               uses: actions/checkout@v3
               with:
                 fetch-depth: 0
+            - name: Create Pull Request
+              env:
+                GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+                _EXT_BASE_REPO: "atolycs/ardent-repo"
+                _EXT_TO_REPO: "ardentteams/ardent-repo"
+                _TEMPLATE_MSG: "Push Complited. Please Merge Me."
+              run:
+                echo "${_TEMPLATE_MSG}" | gh pr create -R ${_EXT_BASER_REPO} \
+                   --base "stable" --head "${_EXT_TO_REPO}:main" \
+                   --title "Please Merge Me" -F - 
+
             - name: Trigger Issue Create
               env:
                 GH_TOKEN: ${{ steps.generate_token.outputs.token }}
-                TEMPLATE_MSG: "Update Complited.<br>Check to [here](https://github.com/ardentteams/ardent-repo.git) and Run`sudo pacman -Sy`"
+                TEMPLATE_MSG: "Created fork branch and Pull Request.<br>Check to [here](https://github.com/ardentteams/ardent-repo.git) and Allow Pull Request"
                 issue-number: ${{ github.event.issue.number }}
               run: |
                 echo "${TEMPLATE_MSG}" | gh issue comment  ${issue-number} \
