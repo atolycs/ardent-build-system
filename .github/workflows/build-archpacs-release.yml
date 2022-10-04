@@ -1,0 +1,157 @@
+name: "Release ArdentLinux repo"
+on:
+    workflow_dispatch:
+    issues:
+      - labeled
+
+jobs:
+    build_packs:
+       if: github.event.label.name == "lgtm"
+       runs-on: ubuntu-22.04
+       name: Merged Update Request
+       steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+        - name: Build All Package
+          uses: ./.github/workflows/build_container/
+          id: arch-build
+        - name: Upload Artifacts
+          uses: actions/upload-artifact@v3
+          with:
+           name: artifact_package
+           path: "*.pkg.tar.zst"
+
+    update_repo:
+          runs-on: ubuntu-22.04
+          needs: build_packs
+          name: Update Repos
+          environment: APP_TOKEN
+          steps:
+            - name: Generate One Time Token
+              id: generate_token
+              uses: tibdex/github-app-token@v1
+              with:
+                 app_id: ${{ secrets.APP_ID }}
+                 private_key: ${{ secrets.PRIVATE_KEY }}
+
+            - name: checkout
+              uses: actions/checkout@v3
+ 
+            - name: Download Artifact
+              uses: actions/download-artifact@v3
+              with:
+                 name: artifact_package
+                 path: ./x86_64
+
+            - name: Update Repo Data
+              uses: ./.github/workflows/upload_container/
+              id: arch-upload
+              env:
+                GPG_REPO_SEC: ${{ secrets.REPO_DEPLOY_KEY }}
+                TEMP_GPGKEY: ${{ secrets.GPG_KEY }}
+                TEMP_OWNER_TRUST: ${{ secrets.OWNER_TRUST }}
+                TEMP_GPG_KEYFINGER_SEC: ${{ secrets.GPG_KEYFINGER_SEC }}
+                build_arch: "x86_64"
+                _repos: "stable"
+
+            - name: Deploy Staging Pages
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  personal_token: ${{ steps.generate_token.outputs.token }}
+#                  github_token: ${{ steps.generate_token.outputs.token }}
+                  publish_dir: ./x86_64
+                  destination_dir: ./x86_64
+                  external_repository: ardentteams/ardent-repo
+                  publish_branch: main
+                  cname: ${{ secrets.ACTIONS_CNAME }}
+                  exclude_assets: 'CNAME'
+                  user_email: "github-actions[bot]@users.noreply.github.com"
+                  user_name: ${{ secrets.APPS_NAME }}
+
+    trigger_issue:
+           runs-on: ubuntu-22.04
+           needs: update_repo
+           environment: APP_TOKEN
+           name: Trigger Issue Create
+           steps:
+            - name: Generate One Time Token
+              id: generate_token
+              uses: tibdex/github-app-token@v1
+              with:
+                app_id: ${{ secrets.APP_ID }}
+                private_key: ${{ secrets.PRIVATE_KEY }}
+
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                fetch-depth: 0
+            - name: Trigger Issue Create
+              env:
+                GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+                TEMPLATE_MSG: "Update Complited.<br>Check to [here](https://github.com/ardentteams/ardent-repo.git) and Run`sudo pacman -Sy`"
+                issue-number: ${{ github.event.issue.number }}
+              run: |
+                echo "${TEMPLATE_MSG}" | gh issue comment  ${issue-number} \
+                   --body-file -
+                gh issue close ${issue-number} -r completed
+
+#            - name: Upload Artifacts
+#              uses: actions/upload-artifact@v3
+#              with:
+#                name: artifact_db
+#                path: "*.pkg.tar.zst"
+#            - name: Upload Artifacts
+#              uses: actions/upload-artifact@v3
+#              with:
+#                name: artifact_db
+#                path: "*.pkg.tar.zst.sig"
+#            - name: Upload Artifacts
+#              uses: actions/upload-artifact@v3
+#              with:
+#                name: artifact_db
+#                path: "ardent-staging.*.tar.xz"
+#            - name: Upload Artifacts
+#              uses: actions/upload-artifact@v3
+#              with:
+#                name: artifact_db
+#                path: "ardent-stable.*.tar.xz"
+#    upload_stgrepo:
+#        runs-on: ubuntu-22.04
+#        name: Upload Staging Repository
+#        needs: update_repo
+#        steps:
+#            - name: Checkout Staging Repo
+#              uses: actions/checkout@v3
+#              with:
+#                repository: atolycs/ardent-repo
+#                token: ${{ secrets.GH_TOKEN }}
+#                ref: main
+#            - name: Download Artifacts
+#              uses: actions/download-artifact@v3
+#              with:
+#                name: artifact_db
+#                path: ./artifacts_db
+#            - name: Rsync Repo Data
+#              run: |
+#                ls -lsa
+#                ls -lsa ./artifacts_db 
+#                rsync -auvz ./artifacts_db/* ./x86_64
+#                rm -rf ./artifacts_db
+#            - name: Create Links
+#              run: |
+#                ln -sf ./ardent-staging.db.tar.xz ./x86_64/ardent-staging.db
+#                ln -sf ./ardent-staging.files.tar.xz ./x86_64/ardent-staging.files
+#                ln -sf ./ardent-stable.db.tar.xz ./x86_64/ardent-stable.db
+#                ln -sf ./ardent-stable.files.tar.xz ./x86_64/ardent-stable.files
+#            - name: Git config
+#              env:
+#                GIT_ACTION_MAIL: ${{ secrets.GIT_ACTION_EMAIL }}
+#              run: |
+#                git config --local user.name "Atolycs by Github Actions"
+#                git config --local user.email ${GIT_ACTION_MAIL}
+#            - name: Push
+#              run: |
+#                git add -A
+#                git commit -m "[Action] Update Repository"
+#                git pull
+#                git push 
