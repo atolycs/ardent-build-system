@@ -1,8 +1,8 @@
-name: "Release ArdentLinux repo"
 on:
     workflow_dispatch:
     issues:
       - labeled
+name: "Release ArdentLinux repo"
 
 jobs:
     build_packs:
