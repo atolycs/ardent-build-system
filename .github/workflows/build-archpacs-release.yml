@@ -63,7 +63,7 @@ jobs:
               with:
 #                  personal_token: ${{ steps.generate_token.outputs.token }}
 #                  github_token: ${{ steps.generate_token.outputs.token }}
-                  source_file: ./x86_64/*
+                  source_file: ./x86_64
                   destination_folder: ./x86_64
                   destination_repo: ardentteams/ardent-repo
                   user_email: "github-actions[bot]@users.noreply.github.com"
