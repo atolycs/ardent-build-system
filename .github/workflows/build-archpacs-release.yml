@@ -7,7 +7,7 @@ name: "Release ArdentLinux repo"
 
 jobs:
     build_packs:
-       if: github.event.label.name == "lgtm"
+       if: github.event.label.name == 'lgtm'
        runs-on: ubuntu-22.04
        name: Merged Update Request
        steps:
