@@ -92,7 +92,7 @@ jobs:
                 _EXT_BASE_REPO: "atolycs/ardent-repo"
                 _EXT_TO_REPO: "ardentteams/ardent-repo"
                 _TEMPLATE_MSG: "Push Complited. Please Merge Me."
-              run:
+              run: |
                 echo "${_TEMPLATE_MSG}" | gh pr create -R ${_EXT_BASER_REPO} \
                    --base "stable" --head "${_EXT_TO_REPO}:main" \
                    --title "Please Merge Me" -F - 
