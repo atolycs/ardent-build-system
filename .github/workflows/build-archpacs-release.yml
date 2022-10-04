@@ -1,7 +1,8 @@
 on:
     workflow_dispatch:
     issues:
-      - labeled
+      types:
+        - labeled
 name: "Release ArdentLinux repo"
 
 jobs:
