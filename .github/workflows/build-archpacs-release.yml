@@ -63,11 +63,11 @@ jobs:
               with:
 #                  personal_token: ${{ steps.generate_token.outputs.token }}
 #                  github_token: ${{ steps.generate_token.outputs.token }}
-                  source_file: ./x86_64
-                  destination_folder: ./x86_64
-                  destination_repo: ardentteams/ardent-repo
+                  source_file: "./x86_64"
+                  destination_folder: "./x86_64"
+                  destination_repo: "ardentteams/ardent-repo"
                   user_email: "github-actions[bot]@users.noreply.github.com"
-                  user_name: ${{ secrets.APPS_NAME }}
+                  user_name: "${{ secrets.APPS_NAME }}"
 
     trigger_issue:
            runs-on: ubuntu-22.04
