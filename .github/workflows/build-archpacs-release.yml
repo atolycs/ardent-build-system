@@ -56,16 +56,16 @@ jobs:
                 _repos: "stable"
 
             - name: Deploy Staging Pages
-              uses: peaceiris/actions-gh-pages@v3
+              uses: dmnemec/copy_file_to_another_repo_action@main
+#              uses: peaceiris/actions-gh-pages@v3
+              env:
+                API_TOKEN_GITHUB: ${{ steps.generate_token.outputs.token }}
               with:
-                  personal_token: ${{ steps.generate_token.outputs.token }}
+#                  personal_token: ${{ steps.generate_token.outputs.token }}
 #                  github_token: ${{ steps.generate_token.outputs.token }}
-                  publish_dir: ./x86_64
-                  destination_dir: ./x86_64
-                  external_repository: ardentteams/ardent-repo
-                  publish_branch: main
-                  cname: ${{ secrets.ACTIONS_CNAME }}
-                  exclude_assets: 'CNAME'
+                  source_file: ./x86_64/*
+                  destination_folder: ./x86_64
+                  destination_repo: ardentteams/ardent-repo
                   user_email: "github-actions[bot]@users.noreply.github.com"
                   user_name: ${{ secrets.APPS_NAME }}
 
