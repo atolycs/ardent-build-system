@@ -90,11 +90,11 @@ jobs:
               env:
                 GH_TOKEN: ${{ steps.generate_token.outputs.token }}
                 TEMPLATE_MSG: "Please Pull Request Forked Repository.<br>Check to [here](https://github.com/ardentteams/ardent-repo.git) and Allow Pull Request"
-                issue-number: ${{ github.event.issue.number }}
+#                issue-number: ${{ github.event.issue.number }}
               run: |
-                echo "${TEMPLATE_MSG}" | gh issue comment  ${issue-number} \
+                echo "${TEMPLATE_MSG}" | gh issue comment ${{ github.event.issue.number }} \
                    --body-file -
-                gh issue close ${issue-number} -r completed
+                gh issue close ${{ github.event.issue.number }}} -r completed
 
 #            - name: Upload Artifacts
 #              uses: actions/upload-artifact@v3
