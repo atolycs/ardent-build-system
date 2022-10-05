@@ -72,7 +72,7 @@ jobs:
     trigger_issue:
            runs-on: ubuntu-22.04
            needs: update_repo
-           environment: APP_TOKEN
+           environment: RELEASE_TOKEN
            name: Trigger Issue Create
            steps:
             - name: Generate One Time Token
@@ -93,7 +93,7 @@ jobs:
                 _EXT_TO_REPO: "ardentteams/ardent-repo"
                 _TEMPLATE_MSG: "Push Complited. Please Merge Me."
               run: |
-                echo "${_TEMPLATE_MSG}" | gh pr create -R ${_EXT_BASER_REPO} \
+                echo "${_TEMPLATE_MSG}" | gh pr create -R ${_EXT_BASE_REPO} \
                    --base "${_EXT_TO_REPO}" --head "stable" \
                    --title "Please Merge Me" --body-file - 
 
