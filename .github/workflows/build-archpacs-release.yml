@@ -94,7 +94,7 @@ jobs:
                 _TEMPLATE_MSG: "Push Complited. Please Merge Me."
               run: |
                 echo "${_TEMPLATE_MSG}" | gh pr create -R ${_EXT_BASE_REPO} \
-                   --base "${_EXT_TO_REPO}" --head "stable" \
+                   --base "${_EXT_TO_REPO}/main" --head "stable" \
                    --title "Please Merge Me" --body-file - 
 
             - name: Trigger Issue Create
