@@ -3,4 +3,4 @@
 #
 
 # Github Custom Domain
-Server = https://repo.atolycs.net/stable/$arch/
+Server = https://repo.atolycs.net/$arch/
