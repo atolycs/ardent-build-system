@@ -24,11 +24,11 @@ prepare() {
 
 build() {
   cd $srcdir/$_git_filepath
-  make amiya
+  OS_NAME="Amiya" make 
 }
 
 package() {
-  install -Dm644 $srcdir/$_git_filepath/os-release usr/lib/os-release
+  PREFIX="/usr" make install
 }
 
 # vim:set ts=2 sw=2 et:
