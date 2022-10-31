@@ -9,27 +9,23 @@ arch=('any')
 license=('GPL')
 depends=('filesystem')
 backup=('usr/lib/os-release')
-source=('ardent-os-release.tar.gz::https://github.com/atolycs/ardent-os-release/archive/refs/heads/master.tar.gz')
+source=('git+https://github.com/atolycs/ardent-os-release.git')
 makedepends=('tar' 'gzip')
 provides=("$pkgbase")
-sha256sums=('281146215d5071c3a85dd7ffd92253f3cfd2611dc79804b1f9196900639dd051')
+sha256sums=('SKIP')
 conflicts=("$pkgbase")
 
 
 _git_filepath="ardent-os-release-master"
 
-prepare() {
-  tar xvfz ardent-os-release.tar.gz
-}
-
 build() {
-  cd $srcdir/$_git_filepath
+  cd $srcdir/$pkgbase
   OS_NAME="Amiya" make 
 }
 
 package() {
-  install -Dm644 $srcdir/$_git_filepath/os-release usr/lib/os-release
-  ln -s /usr/lib/os-release /etc/os-release
+  cd "$srcdir/$pkgbase"
+  make PREFIX=/usr DESTDIR="${pkgdir}" install
 }
 
 # vim:set ts=2 sw=2 et:
