@@ -12,7 +12,7 @@ backup=('usr/lib/os-release')
 source=('ardent-os-release.tar.gz::https://github.com/atolycs/ardent-os-release/archive/refs/heads/master.tar.gz')
 makedepends=('tar' 'gzip')
 provides=("$pkgbase")
-sha256sums=('9325cedb3871156f7b8d95421818b58ef2f62df0c4386db6ac9114dd11ebc472')
+sha256sums=('facd4e7480bed729b25b4ddcbaebb5a2332fdcfc7b141149351252fbe1455770')
 conflicts=("$pkgbase")
 
 
