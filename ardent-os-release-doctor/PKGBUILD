@@ -12,7 +12,7 @@ backup=('usr/lib/os-release')
 source=('ardent-os-release.tar.gz::https://github.com/atolycs/ardent-os-release/archive/refs/heads/master.tar.gz')
 makedepends=('tar' 'gzip')
 provides=("$pkgbase")
-sha256sums=('facd4e7480bed729b25b4ddcbaebb5a2332fdcfc7b141149351252fbe1455770')
+sha256sums=('281146215d5071c3a85dd7ffd92253f3cfd2611dc79804b1f9196900639dd051')
 conflicts=("$pkgbase")
 
 
@@ -28,7 +28,7 @@ build() {
 }
 
 package() {
-  PREFIX="/usr" make install
+  install -Dm644 $srcdir/$_git_filepath/os-release usr/lib/os-release
 }
 
 # vim:set ts=2 sw=2 et:
