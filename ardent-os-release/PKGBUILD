@@ -1,6 +1,5 @@
 # Maintainer: Atolycs <win8.kagamine.len+atolycs@gmail.com>
 
-pkgbase="ardentlinux-release"
 pkgname=("amiya" "doctor")
 pkgver=2022.12.31
 pkgrel=0
