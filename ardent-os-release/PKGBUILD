@@ -10,7 +10,7 @@ license=('GPL')
 depends=('filesystem')
 backup=('usr/lib/os-release')
 source=('os-release.pre' 'Makefile')
-provides=("$_pkgname")
+provides=("$_pkgname-$pkgname")
 sha256sums=('55c228b46c5f9933df7b6a3e1737b99a121578bc98334d2bc0244a34587fcc76'
             '12f05d03cd77617fbffed31930c59ce3f6c8eddf8e8c4e4286d6a5da3893a296')
 
