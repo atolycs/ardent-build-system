@@ -29,6 +29,7 @@ build() {
 
 package() {
   install -Dm644 $srcdir/$_git_filepath/os-release usr/lib/os-release
+  ln -s /usr/lib/os-release /etc/os-release
 }
 
 # vim:set ts=2 sw=2 et:
