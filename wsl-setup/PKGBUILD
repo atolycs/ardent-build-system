@@ -1,0 +1,35 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Atolycs <win8.kagamine.len@gmail.com>
+
+pkgname=wsl-setup
+pkgver=0.3
+pkgdesc="WSL setup starts the setup and reconfigure GUI or TUI"
+pkgrel=0
+arch=("x86_64")
+url="http://archive.ubuntu.com/ubuntu/pool/main/w/wsl-setup"
+license=('GPL')
+makedepends=('make')
+source=("${pkgname}-${pkgver}.tar.xz::${url}/${pkgname}_${pkgver}.tar.xz")
+sha256sums=('fb95ac21eedb885e927399dbefe1c7c41af9fb2f2e68f68e2800e4591defd27e')
+
+
+prepare() {
+	cd "$srcdir"
+	tar xvf ${pkgname}-${pkgver}.tar.xz
+    cd ${srcdir}/${pkgname}-${pkgver}
+    cp ${srcdir}/../Makefile.custom ./Makefile
+}
+
+build() {
+	cd "$srcdir"/${pkgname}-${pkgver}
+	make prefix="${srcdir}/usr/local" wsl-systemd
+}
+
+package() {
+	cd "$pkgname-$pkgver"
+	make DESTDIR="$pkgdir/usr" wsl-systemd
+}

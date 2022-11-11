@@ -1,0 +1,31 @@
+# GNU Standard says we should not assign DESTDIR, but this minor adjustment is really handy when debugging.
+DESTDIR:=$(if $(DESTDIR), $(shell realpath $(DESTDIR)),)
+export INSTALL=install
+
+# Standard GNU Makefile definitions:
+export prefix = /usr
+export exec_prefix = $(prefix)
+export libexecdir = $(exec_prefix)/libexec
+
+
+.PHONY: install clean wsl-systemd
+
+nslogin:
+	$(MAKE) -C ./systemd/nslogin/
+
+
+wsl-systemd:
+	$(INSTALL) -D -o root -m 755 ./systemd/wsl-systemd -t $(DESTDIR)$(libexecdir)
+
+install:
+	mkdir -p $(DESTDIR)$(libexecdir)
+	$(MAKE) -C ./systemd/nslogin/ install
+	$(INSTALL) -D -o root -m 755 ./wsl-setup -t $(DESTDIR)$(libexecdir)
+	$(INSTALL) -D -o root -m 755 ./systemd/wsl-systemd -t $(DESTDIR)$(libexecdir)
+
+
+clean:
+	$(MAKE) -C ./systemd/nslogin/ clean
+	rm -f $(DESTDIR)$(libexecdir)/wsl-setup
+	rm -f $(DESTDIR)$(libexecdir)/wsl-systemd
+
