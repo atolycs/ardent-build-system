@@ -13,6 +13,9 @@ jobs:
        steps:
         - name: Checkout
           uses: actions/checkout@v3
+          with:
+            fetch-deeth: 0
+            submodules: true
         - name: Build All Package
           uses: ./.github/workflows/build_container/
           id: arch-build
