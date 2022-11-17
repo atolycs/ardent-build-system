@@ -4,6 +4,7 @@ if [ -d "/github" ];then
     sudo chown -R build /github/workspace /github/home
 fi
 
+export GPG_TTY=$(tty)
 #echo "${ATOLYCS_PASSPHRASE}" | base64 --decode | tee -a atolycs_pass.txt
 echo "${PACK_PRIVATE_PGP_KEY}" | base64 --decode | gpg --import --passphrase "${ATOLYCS_PASSPHRASE}"
 #echo "${TEMP_OWNER_TRUST}" | tee -a trust-owner.txt
