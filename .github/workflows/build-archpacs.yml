@@ -54,7 +54,7 @@ jobs:
                 PACK_PRIVATE_PGP_KEY: ${{ secrets.ATOLYCS_GPG_PRIVATE_KEYS }}
                 ATOLYCS_PASSPHRASE: ${{ secrets.ATOLYCS_PASSPHRASE }}
                 SIGHN_OWNER: ${{ secrets.ATOLYCS_PGP_KEYID }}
-                  #                : ${{ secrets. }}
+                KEY_TRUST_MODE: ${{ secrets.GPG_TRUST_MODE }}
                 build_arch: "x86_64"
                 _repos: "staging"
 
