@@ -35,8 +35,8 @@ jobs:
               id: generate_token
               uses: tibdex/github-app-token@v1
               with:
-                 app_id: ${{ secrets.GITHUB_APPS_ID }}
-                 private_key: ${{ secrets.GITHUB_APPS_PRIVATE_KEY }}
+                 app_id: ${{ secrets.HUB_APPS_ID }}
+                 private_key: ${{ secrets.HUB_APPS_ACCEESS_PRIVATE_KEY }}
 
             - name: checkout
               uses: actions/checkout@v3
@@ -51,10 +51,10 @@ jobs:
               uses: ./.github/workflows/upload_container/
               id: arch-upload
               env:
-                : ${{ secrets. }}
-                : ${{ secrets. }}
-                : ${{ secrets. }}
-                : ${{ secrets. }}
+                PACK_PRIVATE_PGP_KEY: ${{ secrets.ATOLYCS_GPG_PRIVATE_KEYS }}
+                  #                ATOLYCS_PASSPHRASE: ${{ secrets. }}
+                SIGHN_OWNER: ${{ secrets.ATOLYCS_PGP_KEYID }}
+                  #                : ${{ secrets. }}
                 build_arch: "x86_64"
                 _repos: "staging"
 

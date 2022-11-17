@@ -5,10 +5,10 @@ if [ -d "/github" ];then
 fi
 
 echo -n "${PACK_PRIVATE_PGP_KEY}" | base64 --decode | gpg --import
-echo "${TEMP_OWNER_TRUST}" | tee -a trust-owner.txt
+#echo "${TEMP_OWNER_TRUST}" | tee -a trust-owner.txt
 
 sudo pacman -Sy 
-gpg --import-ownertrust ./trust-owner.txt
+#gpg --import-ownertrust ./trust-owner.txt
 gpg --list-keys
 
 ls -lsa
