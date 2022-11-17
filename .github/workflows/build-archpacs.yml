@@ -29,14 +29,14 @@ jobs:
           runs-on: ubuntu-22.04
           needs: build_packs
           name: Update Repos
-          environment: APP_TOKEN
+          environment: STAGING_TOKEN
           steps:
             - name: Generate One Time Token
               id: generate_token
               uses: tibdex/github-app-token@v1
               with:
-                 app_id: ${{ secrets.APP_ID }}
-                 private_key: ${{ secrets.PRIVATE_KEY }}
+                 app_id: ${{ secrets.GITHUB_APPS_ID }}
+                 private_key: ${{ secrets.GITHUB_APPS_PRIVATE_KEY }}
 
             - name: checkout
               uses: actions/checkout@v3
@@ -51,10 +51,10 @@ jobs:
               uses: ./.github/workflows/upload_container/
               id: arch-upload
               env:
-                GPG_REPO_SEC: ${{ secrets.REPO_DEPLOY_KEY }}
-                TEMP_GPGKEY: ${{ secrets.GPG_KEY }}
-                TEMP_OWNER_TRUST: ${{ secrets.OWNER_TRUST }}
-                TEMP_GPG_KEYFINGER_SEC: ${{ secrets.GPG_KEYFINGER_SEC }}
+                : ${{ secrets. }}
+                : ${{ secrets. }}
+                : ${{ secrets. }}
+                : ${{ secrets. }}
                 build_arch: "x86_64"
                 _repos: "staging"
 
@@ -75,16 +75,15 @@ jobs:
     trigger_issue:
            runs-on: ubuntu-22.04
            needs: update_repo
-           environment: APP_TOKEN
+           environment: STAGING_TOKEN
            name: Trigger Issue Create
            steps:
             - name: Generate One Time Token
               id: generate_token
               uses: tibdex/github-app-token@v1
               with:
-                app_id: ${{ secrets.APP_ID }}
-                private_key: ${{ secrets.PRIVATE_KEY }}
-
+                 app_id: ${{ secrets.GITHUB_APPS_ID }}
+                 private_key: ${{ secrets.GITHUB_APPS_PRIVATE_KEY }}
             - name: Checkout
               uses: actions/checkout@v3
               with:
