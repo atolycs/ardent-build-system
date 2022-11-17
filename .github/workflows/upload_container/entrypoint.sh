@@ -4,7 +4,8 @@ if [ -d "/github" ];then
     sudo chown -R build /github/workspace /github/home
 fi
 
-echo "${PACK_PRIVATE_PGP_KEY}" | base64 --decode | gpg --import
+#echo "${ATOLYCS_PASSPHRASE}" | base64 --decode | tee -a atolycs_pass.txt
+echo "${PACK_PRIVATE_PGP_KEY}" | base64 --decode | gpg --import --passphrase "${ATOLYCS_PASSPHRASE}"
 #echo "${TEMP_OWNER_TRUST}" | tee -a trust-owner.txt
 
 sudo pacman -Sy 

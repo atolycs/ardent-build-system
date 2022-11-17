@@ -52,7 +52,7 @@ jobs:
               id: arch-upload
               env:
                 PACK_PRIVATE_PGP_KEY: ${{ secrets.ATOLYCS_GPG_PRIVATE_KEYS }}
-                  #                ATOLYCS_PASSPHRASE: ${{ secrets. }}
+                ATOLYCS_PASSPHRASE: ${{ secrets.ATOLYCS_PASSPHRASE }}
                 SIGHN_OWNER: ${{ secrets.ATOLYCS_PGP_KEYID }}
                   #                : ${{ secrets. }}
                 build_arch: "x86_64"
