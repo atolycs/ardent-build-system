@@ -6,8 +6,9 @@ fi
 
 #export GPG_TTY=$(tty)
 #echo "${ATOLYCS_PASSPHRASE}" | base64 --decode | tee -a atolycs_pass.txt
-echo "${PACK_PRIVATE_PGP_KEY}" | base64 --decode | tee -a keys.gpg
-gpg --import keys.gpg --passphrase "${ATOLYCS_PASSPHRASE}"
+echo "${PACK_PRIVATE_PGP_KEY}" | base64 --decode >> keys.gpg
+gpg --import keys.gpg
+# --passphrase "${ATOLYCS_PASSPHRASE}"
 #echo "${TEMP_OWNER_TRUST}" | tee -a trust-owner.txt
 
 sudo pacman -Sy 
