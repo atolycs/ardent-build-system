@@ -1,4 +1,4 @@
-#!/bin/sh -l
+#!/bin/sh
 
 if [ $DEBUG_MODE == "true" ];then
 	set -eux
