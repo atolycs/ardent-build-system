@@ -51,6 +51,7 @@ jobs:
               uses: ./.github/workflows/upload_container/
               id: arch-upload
               env:
+                DEBUG_MODE: ${{ secrets.DEBUG_MODE_ACTION }}
                 PACK_PRIVATE_PGP_KEY: ${{ secrets.ATOLYCS_GPG_PRIVATE_KEYS }}
                 ATOLYCS_PASSPHRASE: ${{ secrets.ATOLYCS_PASSPHRASE }}
                 SIGHN_OWNER: ${{ secrets.ATOLYCS_PGP_KEYID }}

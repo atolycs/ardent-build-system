@@ -1,5 +1,9 @@
 #!/bin/sh -l
 
+if [ $DEBUG_MODE == "true" ];then
+	set -eu
+fi
+
 if [ -d "/github" ];then
     sudo chown -R build /github/workspace /github/home
 fi
@@ -20,6 +24,7 @@ ls -lsa
 
 if [ ! -z "${build_arch}" ];then
     cd ${build_arch}
+    ls -lsa
 fi
 
 ls -1 *.pkg.tar.zst | while read line; do
