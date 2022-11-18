@@ -5,9 +5,9 @@ if [ -d "/github" ];then
 fi
 
 #export GPG_TTY=$(tty)
-echo "${ATOLYCS_PASSPHRASE}" | base64 --decode >> atolycs_pass.txt
-echo "${PACK_PRIVATE_PGP_KEY}" | base64 --decode >> keys.gpg
-gpg --import keys.gpg --passphrase $(cat atolycs_pass.txt)
+echo "${ATOLYCS_PASSPHRASE}" | base64 --decode
+echo -n "${PACK_PRIVATE_PGP_KEY}" | base64 --decode | gpg --batch --import --passphrase "$(echo ${ATOLYCS_PASSPHRASE} | base64 --decode)"
+#gpg --import keys.gpg --passphrase $(cat atolycs_pass.txt)
 echo "${KEY_TRUST_MODE}" | base64 --decode | gpg --import-ownertrust
 # --passphrase "${ATOLYCS_PASSPHRASE}"
 #echo "${TEMP_OWNER_TRUST}" | tee -a trust-owner.txt
