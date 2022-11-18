@@ -71,6 +71,7 @@ jobs:
                     --rm \
                     --workdir /github/workspace \
                     -v /github/home:/github/home \
+                    -v /github/workspace:${RUNNER_WORKSPACE} \
                     -e "DEBUG_MODE" \
                     -e "PACK_PRIVATE_PGP_KEY" \
                     -e "ATOLYCS_PASSPHRASE" \
