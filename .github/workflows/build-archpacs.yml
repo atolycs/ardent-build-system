@@ -48,9 +48,7 @@ jobs:
                  path: ./x86_64
 
             - name: Building Update Repo Data On Docker
-              run: |
-              # Build Container Image
-                docker build -t "temp_nn:latest" -f ./.github/workflows/upload_container/Dockerfile ./.github/workflows/upload_container/
+              run: docker build -t "temp_nn:latest" -f ./.github/workflows/upload_container/Dockerfile ./.github/workflows/upload_container/
  
             - name: Running Update Repo
               run: |
