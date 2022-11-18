@@ -85,9 +85,9 @@ jobs:
 #                  github_token: ${{ steps.generate_token.outputs.token }}
                   publish_dir: ./x86_64
                   destination_dir: ./x86_64
-                  external_repository: atolycs/ardent-repo
+                  external_repository: ${{ secrets.REPO_NAME }}
                   publish_branch: main
-                  cname: ${{ secrets.ACTIONS_CNAME }}
+                  cname: ${{ secrets.CNAME }}
                   exclude_assets: 'CNAME'
                   user_email: "github-actions[bot]@users.noreply.github.com"
                   user_name: ${{ secrets.HUB_APPS_NAME }}
