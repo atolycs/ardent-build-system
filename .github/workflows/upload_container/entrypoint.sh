@@ -1,7 +1,7 @@
 #!/bin/sh -l
 
 if [ $DEBUG_MODE == "true" ];then
-	set -eu
+	set -eux
 fi
 
 if [ -d "/github" ];then
