@@ -47,17 +47,37 @@ jobs:
                  name: artifact_package
                  path: ./x86_64
 
-            - name: Update Repo Data
-              uses: ./.github/workflows/upload_container/
-              id: arch-upload
-              env:
-                DEBUG_MODE: ${{ secrets.DEBUG_MODE_ACTION }}
-                PACK_PRIVATE_PGP_KEY: ${{ secrets.ATOLYCS_GPG_PRIVATE_KEYS }}
-                ATOLYCS_PASSPHRASE: ${{ secrets.ATOLYCS_PASSPHRASE }}
-                SIGHN_OWNER: ${{ secrets.ATOLYCS_PGP_KEYID }}
-                KEY_TRUST_MODE: ${{ secrets.GPG_TRUST_MODE }}
-                build_arch: "x86_64"
-                _repos: "staging"
+            - name: Update Repo Data On Docker
+              run:
+                # Setup String
+                DOCKER_IMAGE_ID="$(od -vAn -to1 </dev/urandom | tr -d " " | fold -w 6 | head -n1):$(od -vAn -tx1 </dev/urandom | tr -d " " | fold -w 33 |head -n1)
+                # Build Container Image
+                docker build -t ${DOCKER_IMAGE_ID} -f ./.github/workflows/upload_container/Dockerfile ./.github/workflows/upload_container
+                
+                # Run Container
+                docker run \
+                    -t \
+                    --rm \
+                    --workdir /github/workspace \
+                    -e "DEBUG_MODE" \
+                    -e "PACK_PRIVATE_PGP_KEY" \
+                    -e "ATOLYCS_PASSPHRASE" \
+                    -e "SIGHN_OWNER" \
+                    -e "KEY_TRUST_MODE" \
+                    -e "build_arch" \
+                    -e "_repos" \
+                    ${DOCKER_IMAGE_ID}
+#            - name: Update Repo Data
+#              uses: ./.github/workflows/upload_container/
+#              id: arch-upload
+#              env:
+#                DEBUG_MODE: ${{ secrets.DEBUG_MODE_ACTION }}
+#                PACK_PRIVATE_PGP_KEY: ${{ secrets.ATOLYCS_GPG_PRIVATE_KEYS }}
+#                ATOLYCS_PASSPHRASE: ${{ secrets.ATOLYCS_PASSPHRASE }}
+#                SIGHN_OWNER: ${{ secrets.ATOLYCS_PGP_KEYID }}
+#                KEY_TRUST_MODE: ${{ secrets.GPG_TRUST_MODE }}
+#                build_arch: "x86_64"
+#                _repos: "staging"
 
             - name: Deploy Staging Pages
               uses: peaceiris/actions-gh-pages@v3
