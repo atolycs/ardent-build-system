@@ -101,7 +101,7 @@ jobs:
               uses: tibdex/github-app-token@v1
               with:
                  app_id: ${{ secrets.HUB_APPS_ID }}
-                 private_key: ${{ secrets.HUB_APPS_PRIVATE_KEY }}
+                 private_key: ${{ secrets.HUB_APPS_ACCEESS_PRIVATE_KEY }}
             - name: Checkout
               uses: actions/checkout@v3
               with:
