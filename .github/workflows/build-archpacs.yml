@@ -48,7 +48,7 @@ jobs:
                  path: ./x86_64
 
             - name: Update Repo Data On Docker
-              run:
+              run: |
                 # Setup String
                 DOCKER_IMAGE_ID="$(od -vAn -to1 </dev/urandom | tr -d " " | fold -w 6 | head -n1):$(od -vAn -tx1 </dev/urandom | tr -d " " | fold -w 33 |head -n1)
                 # Build Container Image
