@@ -3,6 +3,7 @@
 if [ $DEBUG_MODE == "true" ];then
 	set -eux
 fi
+export GPG_TTY=$(tty)
 
 if [ -d "/github" ];then
     sudo chown -R build /github/workspace /github/home
