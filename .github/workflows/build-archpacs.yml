@@ -58,10 +58,10 @@ jobs:
                 ls -lsa
                 ls -lsa /dev/urandom
                 # Setup String
-                #DOCKER_IMAGE_ID="$(od -vAn -to1 </dev/urandom | tr -d " " | fold -w 6 | head -n1):$(od -vAn -tx1 </dev/urandom | tr -d " " | fold -w 33 |head -n1)"
+                DOCKER_IMAGE_ID="$(od -vAn -to1 </dev/urandom | tr -d ' ' | fold -w 6 | head -n1):$(od -vAn -tx1 </dev/urandom | tr -d ' ' | fold -w 33 |head -n1)"
                 echo ${DOCKER_IMAGE_ID}
                 # Build Container Image
-                #docker build -t ${DOCKER_IMAGE_ID} -f ./.github/workflows/upload_container/Dockerfile ./.github/workflows/upload_container/
+                docker build -t "${DOCKER_IMAGE_ID}" -f ./.github/workflows/upload_container/Dockerfile ./.github/workflows/upload_container/
  
             - name: Running Update Repo
               run: |
