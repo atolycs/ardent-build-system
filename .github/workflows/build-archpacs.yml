@@ -1,10 +1,10 @@
 on:
     workflow_dispatch:
     pull_request:
-        branches:
-            - 'package/**'
-        types:
-            - closed
+#        branches:
+#            - 'package/**'
+#        types:
+#            - closed
 
 jobs:
     build_packs:
@@ -49,18 +49,7 @@ jobs:
 
             - name: Building Update Repo Data On Docker
               run: |
-                which od
-                which fold
-                which tr
-                which head
-
-                pwd
-                ls -lsa
-                ls -lsa /dev/urandom
-                # Setup String
-                #DOCKER_IMAGE_ID="$(od -vAn -to1 </dev/urandom | tr -d ' ' | fold -w 6 | head -n1):$(od -vAn -tx1 </dev/urandom | tr -d ' ' | fold -w 33 |head -n1)"
-                #echo ${DOCKER_IMAGE_ID}
-                # Build Container Image
+              # Build Container Image
                 docker build -t "temp_nn:latest" -f ./.github/workflows/upload_container/Dockerfile ./.github/workflows/upload_container/
  
             - name: Running Update Repo
@@ -80,9 +69,6 @@ jobs:
                     -e "build_arch" \
                     -e "_repos" \
                     temp_nn:latest
-#            - name: Update Repo Data
-#              uses: ./.github/workflows/upload_container/
-#              id: arch-upload
               env:
                 DEBUG_MODE: ${{ secrets.DEBUG_MODE_ACTION }}
                 PACK_PRIVATE_PGP_KEY: ${{ secrets.ATOLYCS_GPG_PRIVATE_KEYS }}
@@ -104,7 +90,7 @@ jobs:
                   cname: ${{ secrets.ACTIONS_CNAME }}
                   exclude_assets: 'CNAME'
                   user_email: "github-actions[bot]@users.noreply.github.com"
-                  user_name: ${{ secrets.APPS_NAME }}
+                  user_name: ${{ secrets.HUB_APPS_NAME }}
 
     trigger_issue:
            runs-on: ubuntu-22.04
