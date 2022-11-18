@@ -70,6 +70,7 @@ jobs:
                     -t \
                     --rm \
                     --workdir /github/workspace \
+                    -v /github/home:/github/home \
                     -e "DEBUG_MODE" \
                     -e "PACK_PRIVATE_PGP_KEY" \
                     -e "ATOLYCS_PASSPHRASE" \
