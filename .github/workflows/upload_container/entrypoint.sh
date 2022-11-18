@@ -29,7 +29,8 @@ if [ ! -z "${build_arch}" ];then
 fi
 
 ls -1 *.pkg.tar.zst | while read line; do
-    gpg --batch --passphrase-fd "$(echo ${ATOLYCS_PASSPHRASE} | base64 --decode)" -u ${SIGHN_OWNER} --output "${line}.sig" --detach-sig "${line}"
+    echo -e "$(echo ${ATOLYCS_PASSPHRASE} | base64 --decode)\n" | \
+        gpg --batch --command-fd 0 -u ${SIGHN_OWNER} --output "${line}.sig" --detach-sig "${line}"
 done
 
 if [[ ! -z "${_repos}" ]];then
