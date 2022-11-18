@@ -83,8 +83,8 @@ jobs:
 #                  github_token: ${{ steps.generate_token.outputs.token }}
                   publish_dir: ./x86_64
                   destination_dir: ./x86_64
-                  external_repository: ${{ secrets.REPO_NAME }}
-                  publish_branch: main
+                  external_repository: atolycs/ardent-repo
+                  publish_branch: ${{ secrets.RELEASE_MODE }}
                   cname: ${{ secrets.CNAME }}
                   exclude_assets: 'CNAME'
                   user_email: "github-actions[bot]@users.noreply.github.com"
@@ -100,8 +100,8 @@ jobs:
               id: generate_token
               uses: tibdex/github-app-token@v1
               with:
-                 app_id: ${{ secrets.GITHUB_APPS_ID }}
-                 private_key: ${{ secrets.GITHUB_APPS_PRIVATE_KEY }}
+                 app_id: ${{ secrets.HUB_APPS_ID }}
+                 private_key: ${{ secrets.HUB_APPS_PRIVATE_KEY }}
             - name: Checkout
               uses: actions/checkout@v3
               with:
