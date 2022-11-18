@@ -18,7 +18,7 @@ echo "${KEY_TRUST_MODE}" | base64 --decode | gpg --import-ownertrust
 
 sudo pacman -Sy 
 #gpg --import-ownertrust ./trust-owner.txt
-gpg --list-keys
+gpg -K
 
 ls -lsa
 
@@ -28,7 +28,7 @@ if [ ! -z "${build_arch}" ];then
 fi
 
 ls -1 *.pkg.tar.zst | while read line; do
-    gpg -u ${SIGHN_OWNER} --output "${line}.sig" --detach-sig "${line}"
+    gpg --batch -u ${SIGHN_OWNER} --output "${line}.sig" --detach-sig "${line}"
 done
 
 if [[ ! -z "${_repos}" ]];then
