@@ -52,8 +52,8 @@ jobs:
                 which od
                 which fold
                 which tr
-                which head-e "DEBUG_MODE" -e "PACK_PRIVATE_PGP_KEY" -e "ATOLYCS_PASSPHRASE" -e "SIGHN_OWNER" -e "KEY_TRUST_MODE" -e "build_arch" -e "_repos"
-                
+                which head
+
                 pwd
                 ls -lsa
                 ls -lsa /dev/urandom
