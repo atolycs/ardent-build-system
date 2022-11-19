@@ -1,6 +1,6 @@
 # Maintainer: Atolycs <win8.kagamine.len@gmail.com>
 pkgname=ardentlinux-keyring
-pkgver=20220927
+pkgver=20221119
 pkgrel=2
 pkgdesc='ArdentLinux PGP keyring'
 url="https://github.com/ardentteams"
@@ -9,7 +9,7 @@ license=('GPL')
 install="${pkgname}.install"
 makedepends=("git")
 source=("git+https://github.com/ardentteams/ardentlinux-keyring.git")
-validpgpkeys=("3DB0B04F67B35F427DCD1BBFCCA719880701ABDE")
+validpgpkeys=("05C8EAD6832077BCF94E8A475F45CA7DCEFCA24B")
 sha256sums=('SKIP')
 package() {
     cd "${srcdir}/${pkgname}"
